@@ -53,7 +53,7 @@ module "lb_openapi" {
     Environment = var.stage
   }
 }
-
+/*
 module "lb_admin" {
   source  = "terraform-aws-modules/alb/aws"
 
@@ -129,4 +129,32 @@ module "lb_admin" {
   tags = {
     Environment = var.stage
   }
+}
+    
+*/
+      
+resource "aws_lb_target_group" "admin" {
+  name     = "tf-example-lb-tg"
+  port     = 80
+  protocol = "HTTP"
+  vpc_id   = module.vpc.vpc_id
+}
+    
+resource "aws_lb_listener_rule" "admin" {
+  listener_arn = "${module.lb_openapi.http_tcp_listener_arns[0]}"
+  priority     = 100
+
+  action {
+    type             = "forward"
+    target_group_arn = "${aws_lb_target_group.admin.arn}"
+  }
+
+  condition {
+    path_pattern {
+      values = ["/admin/*"]
+    }
+  }
+
+  
+ 
 }
