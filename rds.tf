@@ -8,6 +8,7 @@ module "db" {
   engine_version    = "5.7.19"
   instance_class    = var.rds_instance_type
   allocated_storage = 5
+  max_allocated_storage = 10
 
   name     = "demodb"
   username = "user"
