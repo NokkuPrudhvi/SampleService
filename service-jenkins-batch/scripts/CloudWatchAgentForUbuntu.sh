@@ -1,5 +1,7 @@
 curl https://s3.amazonaws.com/aws-cloudwatch/downloads/latest/awslogs-agent-setup.py -O
-sudo python3 ./awslogs-agent-setup.py --region us-east-1
+sudo python3 ./awslogs-agent-setup.py --region us-east-1 --non-interactive
+
+
 
 #reference:
 # https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/QuickStartEC2Instance.html
